@@ -42,8 +42,6 @@ function calculateLeaderboardPlaces(users, minScores) {
   const sortedUsers = [...users];
   sortedUsers.sort((a, b) => b.score - a.score);
 
-  console.log("### users", users);
-
   const usersMap = sortedUsers.reduce((acc, item) => {
     acc[item.userId] = {
       possiblePlaces: getPossiblePlaces(item.score, minScores),
@@ -138,7 +136,6 @@ function calculateLeaderboardPlaces(users, minScores) {
     }
   }
 
-  console.log("### leaderboardList", leaderboardList);
   return leaderboardList;
 }
 
