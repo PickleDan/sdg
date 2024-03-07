@@ -42,6 +42,8 @@ function calculateLeaderboardPlaces(users, minScores) {
   const sortedUsers = [...users];
   sortedUsers.sort((a, b) => b.score - a.score);
 
+  console.log("### users", users);
+
   const usersMap = sortedUsers.reduce((acc, item) => {
     acc[item.userId] = {
       possiblePlaces: getPossiblePlaces(item.score, minScores),
@@ -55,16 +57,24 @@ function calculateLeaderboardPlaces(users, minScores) {
 
   for (const [key, value] of Object.entries(usersMap)) {
     const isEnoughPointsForPrizes = value.possiblePlaces.length !== 0;
-    const maxPossiblePlace = isEnoughPointsForPrizes ? value.possiblePlaces[0] : null;
+    const maxPossiblePlace = isEnoughPointsForPrizes
+      ? value.possiblePlaces[0]
+      : null;
 
-    const isFirstPlaceStillAvailable = isPlaceStillAvailable(leaderboardList, 1);
-    const isSecondPlaceStillAvailable = isPlaceStillAvailable(leaderboardList, 2);
-    const isThirdPlaceStillAvailable = isPlaceStillAvailable(leaderboardList, 3);
+    const isFirstPlaceStillAvailable = isPlaceStillAvailable(
+      leaderboardList,
+      1,
+    );
+    const isSecondPlaceStillAvailable = isPlaceStillAvailable(
+      leaderboardList,
+      2,
+    );
+    const isThirdPlaceStillAvailable = isPlaceStillAvailable(
+      leaderboardList,
+      3,
+    );
 
-    const areLeadersFound =
-      !isFirstPlaceStillAvailable &&
-      !isSecondPlaceStillAvailable &&
-      !isThirdPlaceStillAvailable;
+    let areLeadersFound = !isThirdPlaceStillAvailable;
 
     if (maxPossiblePlace === 1) {
       if (isFirstPlaceStillAvailable) {
@@ -128,7 +138,8 @@ function calculateLeaderboardPlaces(users, minScores) {
     }
   }
 
-  return leaderboardList
+  console.log("### leaderboardList", leaderboardList);
+  return leaderboardList;
 }
 
 // Функция определяет все возможные призовые места для юзера
@@ -148,6 +159,16 @@ const getPossiblePlaces = (score, minScores) => {
 // Проверка свободного призового места
 const isPlaceStillAvailable = (leaderboard, place) => {
   return leaderboard.every((user) => user.place !== place);
+};
+
+const areLeadersFound = (
+  isFirstPlaceStillAvailable,
+  isSecondPlaceStillAvailable,
+  isThirdPlaceStillAvailable,
+) => {
+  if (!isThirdPlaceStillAvailable) {
+    return true;
+  }
 };
 
 // функция-helper, ее модифицировать не нужно
@@ -258,5 +279,142 @@ console.log(
     { userId: "id4", place: 4 },
   ]),
 );
+
+let result16 = calculateLeaderboardPlaces(
+  [
+    { userId: "id1", score: 13 },
+    { userId: "id2", score: 12 },
+    { userId: "id3", score: 11 },
+    { userId: "id4", score: 5 },
+  ],
+  { firstPlaceMinScore: 100, secondPlaceMinScore: 50, thirdPlaceMinScore: 10 },
+);
+console.log(
+  "test16",
+  checkResult(result16, [
+    { userId: "id1", place: 3 },
+    { userId: "id2", place: 4 },
+    { userId: "id3", place: 5 },
+    { userId: "id4", place: 6 },
+  ]),
+);
+
+let result17 = calculateLeaderboardPlaces(
+  [
+    { userId: "id1", score: 55 },
+    { userId: "id2", score: 54 },
+    { userId: "id3", score: 53 },
+    { userId: "id4", score: 5 },
+  ],
+  { firstPlaceMinScore: 100, secondPlaceMinScore: 50, thirdPlaceMinScore: 10 },
+);
+console.log(
+  "test17",
+  checkResult(result17, [
+    { userId: "id1", place: 2 },
+    { userId: "id2", place: 3 },
+    { userId: "id3", place: 4 },
+    { userId: "id4", place: 5 },
+  ]),
+);
+
+let result18 = calculateLeaderboardPlaces(
+  [
+    { userId: "id1", score: 101 },
+    { userId: "id2", score: 100 },
+    { userId: "id3", score: 10 },
+    { userId: "id4", score: 5 },
+  ],
+  { firstPlaceMinScore: 100, secondPlaceMinScore: 50, thirdPlaceMinScore: 10 },
+);
+console.log(
+  "result18",
+  checkResult(result18, [
+    { userId: "id1", place: 1 },
+    { userId: "id2", place: 2 },
+    { userId: "id3", place: 3 },
+    { userId: "id4", place: 4 },
+  ]),
+);
+
+let result19 = calculateLeaderboardPlaces(
+  [
+    { userId: "id1", score: 55 },
+    { userId: "id2", score: 50 },
+    { userId: "id3", score: 8 },
+    { userId: "id4", score: 5 },
+  ],
+  { firstPlaceMinScore: 100, secondPlaceMinScore: 50, thirdPlaceMinScore: 10 },
+);
+console.log(
+  "result19",
+  checkResult(result19, [
+    { userId: "id1", place: 2 },
+    { userId: "id2", place: 3 },
+    { userId: "id3", place: 4 },
+    { userId: "id4", place: 5 },
+  ]),
+);
+
+let result20 = calculateLeaderboardPlaces(
+    [
+        { userId: "id1", score: 120 },
+        { userId: "id2", score: 115 },
+        { userId: "id3", score: 110 },
+        { userId: "id4", score: 105 },
+    ],
+    { firstPlaceMinScore: 100, secondPlaceMinScore: 50, thirdPlaceMinScore: 10 },
+);
+console.log(
+    "result20",
+    checkResult(result20, [
+        { userId: "id1", place: 1 },
+        { userId: "id2", place: 2 },
+        { userId: "id3", place: 3 },
+        { userId: "id4", place: 4 },
+    ]),
+);
+
+let result21 = calculateLeaderboardPlaces(
+    [
+        { userId: "id1", score: 15 },
+        { userId: "id2", score: 14 },
+        { userId: "id3", score: 13 },
+        { userId: "id4", score: 12 },
+    ],
+    { firstPlaceMinScore: 100, secondPlaceMinScore: 50, thirdPlaceMinScore: 10 },
+);
+console.log(
+    "result21",
+    checkResult(result21, [
+        { userId: "id1", place: 3 },
+        { userId: "id2", place: 4 },
+        { userId: "id3", place: 5 },
+        { userId: "id4", place: 6 },
+    ]),
+);
+
+let result22 = calculateLeaderboardPlaces(
+    [
+        { userId: "id1", score: 101 },
+        { userId: "id2", score: 9 },
+        { userId: "id3", score: 8 },
+        { userId: "id4", score: 7 },
+    ],
+    { firstPlaceMinScore: 100, secondPlaceMinScore: 50, thirdPlaceMinScore: 10 },
+);
+console.log(
+    "result22",
+    checkResult(result22, [
+        { userId: "id1", place: 1 },
+        { userId: "id2", place: 4 },
+        { userId: "id3", place: 5 },
+        { userId: "id4", place: 6 },
+    ]),
+);
+
+
+
+
 
 console.log("-----------------------------------------------------");
