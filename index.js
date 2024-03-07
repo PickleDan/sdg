@@ -357,64 +357,60 @@ console.log(
 );
 
 let result20 = calculateLeaderboardPlaces(
-    [
-        { userId: "id1", score: 120 },
-        { userId: "id2", score: 115 },
-        { userId: "id3", score: 110 },
-        { userId: "id4", score: 105 },
-    ],
-    { firstPlaceMinScore: 100, secondPlaceMinScore: 50, thirdPlaceMinScore: 10 },
+  [
+    { userId: "id1", score: 120 },
+    { userId: "id2", score: 115 },
+    { userId: "id3", score: 110 },
+    { userId: "id4", score: 105 },
+  ],
+  { firstPlaceMinScore: 100, secondPlaceMinScore: 50, thirdPlaceMinScore: 10 },
 );
 console.log(
-    "result20",
-    checkResult(result20, [
-        { userId: "id1", place: 1 },
-        { userId: "id2", place: 2 },
-        { userId: "id3", place: 3 },
-        { userId: "id4", place: 4 },
-    ]),
+  "result20",
+  checkResult(result20, [
+    { userId: "id1", place: 1 },
+    { userId: "id2", place: 2 },
+    { userId: "id3", place: 3 },
+    { userId: "id4", place: 4 },
+  ]),
 );
 
 let result21 = calculateLeaderboardPlaces(
-    [
-        { userId: "id1", score: 15 },
-        { userId: "id2", score: 14 },
-        { userId: "id3", score: 13 },
-        { userId: "id4", score: 12 },
-    ],
-    { firstPlaceMinScore: 100, secondPlaceMinScore: 50, thirdPlaceMinScore: 10 },
+  [
+    { userId: "id1", score: 15 },
+    { userId: "id2", score: 14 },
+    { userId: "id3", score: 13 },
+    { userId: "id4", score: 12 },
+  ],
+  { firstPlaceMinScore: 100, secondPlaceMinScore: 50, thirdPlaceMinScore: 10 },
 );
 console.log(
-    "result21",
-    checkResult(result21, [
-        { userId: "id1", place: 3 },
-        { userId: "id2", place: 4 },
-        { userId: "id3", place: 5 },
-        { userId: "id4", place: 6 },
-    ]),
+  "result21",
+  checkResult(result21, [
+    { userId: "id1", place: 3 },
+    { userId: "id2", place: 4 },
+    { userId: "id3", place: 5 },
+    { userId: "id4", place: 6 },
+  ]),
 );
 
 let result22 = calculateLeaderboardPlaces(
-    [
-        { userId: "id1", score: 101 },
-        { userId: "id2", score: 9 },
-        { userId: "id3", score: 8 },
-        { userId: "id4", score: 7 },
-    ],
-    { firstPlaceMinScore: 100, secondPlaceMinScore: 50, thirdPlaceMinScore: 10 },
+  [
+    { userId: "id1", score: 101 },
+    { userId: "id2", score: 9 },
+    { userId: "id3", score: 8 },
+    { userId: "id4", score: 7 },
+  ],
+  { firstPlaceMinScore: 100, secondPlaceMinScore: 50, thirdPlaceMinScore: 10 },
 );
 console.log(
-    "result22",
-    checkResult(result22, [
-        { userId: "id1", place: 1 },
-        { userId: "id2", place: 4 },
-        { userId: "id3", place: 5 },
-        { userId: "id4", place: 6 },
-    ]),
+  "result22",
+  checkResult(result22, [
+    { userId: "id1", place: 1 },
+    { userId: "id2", place: 4 },
+    { userId: "id3", place: 5 },
+    { userId: "id4", place: 6 },
+  ]),
 );
-
-
-
-
 
 console.log("-----------------------------------------------------");
