@@ -158,16 +158,6 @@ const isPlaceStillAvailable = (leaderboard, place) => {
   return leaderboard.every((user) => user.place !== place);
 };
 
-const areLeadersFound = (
-  isFirstPlaceStillAvailable,
-  isSecondPlaceStillAvailable,
-  isThirdPlaceStillAvailable,
-) => {
-  if (!isThirdPlaceStillAvailable) {
-    return true;
-  }
-};
-
 // функция-helper, ее модифицировать не нужно
 function checkResult(answer, correctAnswer) {
   if (!answer) return false;
@@ -407,6 +397,21 @@ console.log(
     { userId: "id2", place: 4 },
     { userId: "id3", place: 5 },
     { userId: "id4", place: 6 },
+  ]),
+);
+
+let result23 = calculateLeaderboardPlaces(
+  [
+    { userId: "id1", score: 9 },
+    { userId: "id2", score: 8 },
+  ],
+  { firstPlaceMinScore: 100, secondPlaceMinScore: 50, thirdPlaceMinScore: 10 },
+);
+console.log(
+  "result23",
+  checkResult(result23, [
+    { userId: "id1", place: 4 },
+    { userId: "id2", place: 5 },
   ]),
 );
 
